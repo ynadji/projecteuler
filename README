@@ -1,0 +1,13 @@
+= Euler =
+This project is the source code for my solutions to Project Euler (http://projecteuler.net)
+problems. We've got solutions in Haskell, Clojure and Common Lisp!
+
+== Haskell ==
+* Utils.hs - Utility functions
+* euler.hs - Actual solutions to problems (may include some problem-specific functions).
+
+== Clojure ==
+TODO!
+
+== Common Lisp ==
+TODO!
