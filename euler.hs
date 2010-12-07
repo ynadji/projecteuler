@@ -1,9 +1,9 @@
 import Utils
 
-import List (sort, nub)
+import List (sort, nub, group)
 import Data.List (permutations)
 import Data.Digits
-import Data.Numbers.Primes (primes)
+import Data.Numbers.Primes (primes, primeFactors)
 
 is43pandigital (d1:d2:d3:d4:d5:d6:d7:d8:d9:d10:xs) =
       unDigits 10 [d8, d9, d10] `mod` 17 == 0 &&
@@ -16,6 +16,18 @@ is43pandigital (d1:d2:d3:d4:d5:d6:d7:d8:d9:d10:xs) =
       
 euler43 :: Integer
 euler43 = sum $ map (unDigits 10) $ filter is43pandigital $ permutations [0..9]
+
+euler47 =
+  {- Find the first four consecutive numbers with 4 pairwise distinct
+     prime factors.
+  -}
+  let getFactors n = group $ primeFactors n
+      isgood a b c d =
+        let withDupes = map getFactors [a, b, c, d]
+            lens = map length withDupes
+        in length withDupes == 4 && all (== 4) lens
+      findMatch (a:b:c:d:xs) = if isgood a b c d then a else findMatch $ b:c:d:xs
+  in findMatch [1..]
 
 euler49 =
   let fourDigitPrimes = filter (>999) $ takeWhile (<9999) primes
