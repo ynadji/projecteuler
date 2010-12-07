@@ -12,6 +12,9 @@ combinations n (x:xs) = (map (x:) (combinations (n-1) xs)) ++ (combinations n xs
 
 concatNums list = read (concat $ map show list) :: Integer
 
+flatten :: [[a]] -> [a]
+flatten list = foldl (++) [] list
+
 -- Returns True iff the element is in the _ordered_ list.
 elemorder n list = elem n $ takeWhile (<= n) list
 
