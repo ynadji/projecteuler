@@ -26,6 +26,19 @@ euler44 =
         in filter (not . null) $ map (\y -> if (isgood x y) then [x, y] else []) pentsBelow
       (x:y:_) = flatten $ head $ filter (not . null) $ map hasPentDiff pentagonals
   in x - y
+
+euler46 =
+  {- What is the smallest odd composite that cannot be written as the sum of a prime and
+     twice a square?
+  -}
+  let oddComposites = tail [x | x <- composites, odd x]
+      twiceSquares = [2*x^2 | x <- [1..]]
+      isgood n = let primesBelow = takeWhile (< n) primes
+                     squaresBelow = takeWhile (< n) twiceSquares
+                     allcombs = [[x, y] | x <- primesBelow, y <- squaresBelow]
+                 in any (\(x:y:_) -> x + y == n) allcombs
+  in head $ filter (not . isgood) oddComposites
+
 euler47 =
   {- Find the first four consecutive numbers with 4 pairwise distinct
      prime factors.
