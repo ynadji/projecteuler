@@ -17,6 +17,15 @@ is43pandigital (d1:d2:d3:d4:d5:d6:d7:d8:d9:d10:xs) =
 euler43 :: Integer
 euler43 = sum $ map (unDigits 10) $ filter is43pandigital $ permutations [0..9]
 
+euler44 =
+  {- Find the smallest pair of pentagonal numbers whose sum and difference is pentagonal. -}
+  let isgood x y = (abs (x - y)) `elemorder` pentagonals &&
+                   (x + y) `elemorder` pentagonals
+      hasPentDiff x =
+        let pentsBelow = takeWhile (< x) pentagonals
+        in filter (not . null) $ map (\y -> if (isgood x y) then [x, y] else []) pentsBelow
+      (x:y:_) = flatten $ head $ filter (not . null) $ map hasPentDiff pentagonals
+  in x - y
 euler47 =
   {- Find the first four consecutive numbers with 4 pairwise distinct
      prime factors.
