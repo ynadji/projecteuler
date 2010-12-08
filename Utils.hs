@@ -37,3 +37,7 @@ lychrels n = iterate swapAndSum n
 
 lychrel :: Int -> Bool
 lychrel n = not $ any palindrome $ take 50 $ drop 1 $ lychrels n
+
+-- Number generators
+pentagonals = map (\x -> truncate ((x * (3 * x - 1)) / 2)) [1..]
+composites = [x | x <- [1..], not $ x `elemorder` primes]
