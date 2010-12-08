@@ -1,13 +1,19 @@
 = Euler =
 This project is the source code for my solutions to Project Euler (http://projecteuler.net)
-problems. We've got solutions in Haskell, Clojure and Common Lisp!
+problems. I've written solutions in Haskell, Clojure and Common Lisp!
 
 == Haskell ==
 * Utils.hs - Utility functions
 * euler.hs - Actual solutions to problems (may include some problem-specific functions).
 
-== Clojure ==
-TODO!
+== Clojure (clj/) ==
+* nifty_funs.clj - Utility functions
+* project-euler.clj - Solutions
 
-== Common Lisp ==
-TODO!
+== Common Lisp (cl/) ==
+* nifty_funs.lisp - Utility functions
+* onlisp.lisp - Utility functions that come from Paul Graham's "On Lisp"
+* project-euler.lisp - Solutions
+
+== Data (data/) ==
+This is a data directory containing files that accompany problems.
