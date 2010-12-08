@@ -1,5 +1,4 @@
 module Utils where
-
 import Data.Digits
 import Data.Numbers.Primes (primes)
 import qualified Data.Set as Set
@@ -41,3 +40,7 @@ lychrel n = not $ any palindrome $ take 50 $ drop 1 $ lychrels n
 -- Number generators
 pentagonals = map (\x -> truncate ((x * (3 * x - 1)) / 2)) [1..]
 composites = [x | x <- [1..], not $ x `elemorder` primes]
+
+-- Number theory
+isRelPrime x y = gcd x y == 1
+totient n = length $ filter (isRelPrime n) [1..n-1]
