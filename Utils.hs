@@ -2,6 +2,7 @@ module Utils where
 import Data.Digits
 import Data.Numbers.Primes (primes)
 import qualified Data.Set as Set
+import Data.Bits (shift, bit)
 
 -- Helper functions
 combinations :: Int -> [a] -> [[a]]
@@ -44,3 +45,12 @@ composites = [x | x <- [1..], not $ x `elemorder` primes]
 -- Number theory
 isRelPrime x y = gcd x y == 1
 totient n = length $ filter (isRelPrime n) [1..n-1]
+
+-- Modular arithmetic
+modexp :: Integer -> Integer -> Integer -> Integer
+modexp b e m =
+  let aux b e m res
+        | e <= 0 = res
+        | odd e = aux (b * b `mod` m) (shift e (-1)) m (res * b `mod` m)
+        | otherwise = aux (b * b `mod` m) (shift e (-1)) m res
+  in aux b e m 1
