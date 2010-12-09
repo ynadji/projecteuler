@@ -74,3 +74,9 @@ euler55 = length $ filter id $ map lychrel [1..9999]
 
 {- Considering natural numbers of the form, a^b, finding the maximum digital sum. -}
 euler56 = maximum [sum $ digits 10 $ x^y | x <- [1..99], y <- [1..99]]
+
+{- Find the last ten digits of the non-Mersenne prime: 28433 * 2^7830457 + 1. -}
+euler97 = (28433 * (modexp 2 7830457 10000000000) + 1) `mod` 10000000000
+
+{- Find the last 8 digits of 1777↑↑1855. -}
+euler188 = iterate (\x -> modexp 1777 x 100000000) 1777 !! 1855
