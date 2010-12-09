@@ -66,6 +66,8 @@ euler50 =
       aux n = maximum $ filter (\x -> x `elem` p) $ takeWhile (< 1000000) $ scanl1 (+) $ drop n primes
       in maximum $ map aux [1..10]
 
+{- How many Lychrel numbers are there below ten-thousand? -}
 euler55 = length $ filter id $ map lychrel [1..9999]
 
+{- Considering natural numbers of the form, a^b, finding the maximum digital sum. -}
 euler56 = maximum [sum $ digits 10 $ x^y | x <- [1..99], y <- [1..99]]
