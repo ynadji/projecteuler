@@ -4,18 +4,19 @@ import List (sort, nub, group)
 import Data.List (permutations)
 import Data.Digits
 import Data.Numbers.Primes (primes, primeFactors)
-
-is43pandigital (d1:d2:d3:d4:d5:d6:d7:d8:d9:d10:xs) =
-      unDigits 10 [d8, d9, d10] `mod` 17 == 0 &&
-      unDigits 10 [d7, d8, d9] `mod` 13 == 0 &&
-      unDigits 10 [d6, d7, d8] `mod` 11 == 0 &&
-      unDigits 10 [d5, d6, d7] `mod` 7 == 0 &&
-      unDigits 10 [d4, d5, d6] `mod` 5 == 0 &&
-      unDigits 10 [d3, d4, d5] `mod` 3 == 0 &&
-      unDigits 10 [d2, d3, d4] `mod` 2 == 0
-      
+    
 euler43 :: Integer
-euler43 = sum $ map (unDigits 10) $ filter is43pandigital $ permutations [0..9]
+euler43 = 
+  {- Find the sum of all pandigital numbers with an unusual sub-string divisibility property. -}
+  let is43pandigital [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10] =
+        unDigits 10 [d8, d9, d10] `mod` 17 == 0 &&
+        unDigits 10 [d7, d8, d9] `mod` 13 == 0 &&
+        unDigits 10 [d6, d7, d8] `mod` 11 == 0 &&
+        unDigits 10 [d5, d6, d7] `mod` 7 == 0 &&
+        unDigits 10 [d4, d5, d6] `mod` 5 == 0 &&
+        unDigits 10 [d3, d4, d5] `mod` 3 == 0 &&
+        unDigits 10 [d2, d3, d4] `mod` 2 == 0
+  in sum $ map (unDigits 10) $ filter is43pandigital $ permutations [0..9]
 
 euler44 =
   {- Find the smallest pair of pentagonal numbers whose sum and difference is pentagonal. -}
@@ -52,6 +53,7 @@ euler47 =
   in findMatch [1..]
 
 euler49 =
+  {- Find arithmetic sequences, made of prime terms, whose four digits are permutations of each other. -}
   let fourDigitPrimes = filter (>999) $ takeWhile (<9999) primes
       getPermsInP n p = filter (\x -> x `elem` p) $ map (unDigits 10) $ permutations $ digits 10 n
       isgood [x,y,z] p = (y - x) == (z - y) && x /= y && y /= z && all (\x -> x `elem` p) [x,y,z]
@@ -62,6 +64,7 @@ euler49 =
          in concatNums otherSeq
 
 euler50 = 
+  {- Which prime, below one-million, can be written as the sum of the most consecutive primes? -}
   let p = takeWhile (< 1000000) primes
       aux n = maximum $ filter (\x -> x `elem` p) $ takeWhile (< 1000000) $ scanl1 (+) $ drop n primes
       in maximum $ map aux [1..10]
