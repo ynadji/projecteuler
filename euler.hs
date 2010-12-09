@@ -67,3 +67,5 @@ euler50 =
       in maximum $ map aux [1..10]
 
 euler55 = length $ filter id $ map lychrel [1..9999]
+
+euler56 = maximum [sum $ digits 10 $ x^y | x <- [1..99], y <- [1..99]]
