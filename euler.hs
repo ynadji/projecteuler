@@ -24,7 +24,7 @@ euler44 =
       hasPentDiff x =
         let pentsBelow = takeWhile (< x) pentagonals
         in filter (not . null) $ map (\y -> if (isgood x y) then [x, y] else []) pentsBelow
-      (x:y:_) = flatten $ head $ filter (not . null) $ map hasPentDiff pentagonals
+      [x,y] = flatten $ head $ filter (not . null) $ map hasPentDiff pentagonals
   in x - y
 
 euler46 =
@@ -36,7 +36,7 @@ euler46 =
       isgood n = let primesBelow = takeWhile (< n) primes
                      squaresBelow = takeWhile (< n) twiceSquares
                      allcombs = [[x, y] | x <- primesBelow, y <- squaresBelow]
-                 in any (\(x:y:_) -> x + y == n) allcombs
+                 in any (\[x,y] -> x + y == n) allcombs
   in head $ filter (not . isgood) oddComposites
 
 euler47 =
@@ -54,7 +54,7 @@ euler47 =
 euler49 =
   let fourDigitPrimes = filter (>999) $ takeWhile (<9999) primes
       getPermsInP n p = filter (\x -> x `elem` p) $ map (unDigits 10) $ permutations $ digits 10 n
-      isgood (x:y:z:_) p = (y - x) == (z - y) && x /= y && y /= z && all (\x -> x `elem` p) [x,y,z]
+      isgood [x,y,z] p = (y - x) == (z - y) && x /= y && y /= z && all (\x -> x `elem` p) [x,y,z]
       otherSeq = last $ nub $ concat $ filter (not . null) $ 
          map (\y -> filter (\x -> isgood x fourDigitPrimes) 
                     $ map sort $ combinations 3 
